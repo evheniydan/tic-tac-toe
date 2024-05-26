@@ -7,11 +7,11 @@ import GameStatus from './components/GameStatus'
 import Board from './components/Board'
 import Buttons from './components/Buttons'
 
-const generateRandomPlayer = () => (Math.random() < 0.5 ? PLAYER_X : PLAYER_O)
-const cleanBoard = Array(9).fill()
-
 const App = () => {
-  const [currentPlayer, setCurrentPlayer] = useState(generateRandomPlayer())
+  const randomPlayer = Math.random() < 0.5 ? PLAYER_X : PLAYER_O
+  const cleanBoard = Array(9).fill()
+
+  const [currentPlayer, setCurrentPlayer] = useState(randomPlayer)
   const [board, setBoard] = useState(cleanBoard)
   const [winner, setWinner] = useState()
   const [isGameOver, setIsGameOver] = useState(false)
@@ -21,11 +21,11 @@ const App = () => {
     setWinner()
     setIsGameOver(false)
     setBoard(cleanBoard)
-    setCurrentPlayer(generateRandomPlayer())
+    setCurrentPlayer(randomPlayer)
   }
 
   useEffect(() => {
-    const checkEqualEl = ([winCellIdx1, winCellIdx2, winCellIdx3]) => {
+    const checkWinner = ([winCellIdx1, winCellIdx2, winCellIdx3]) => {
       const winningCellsAreNotEmpty =
         board[winCellIdx1] && board[winCellIdx2] && board[winCellIdx3]
       const winningCellsAreEqual =
@@ -35,8 +35,9 @@ const App = () => {
     }
 
     WINNING_COMBOS.forEach((combo) => {
-      if (checkEqualEl(combo)) {
-        setWinner(board[combo[0]])
+      if (checkWinner(combo)) {
+        const comboWinner = board[combo[0]]
+        setWinner(comboWinner)
         setIsGameOver(true)
       }
     })
