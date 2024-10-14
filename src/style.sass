@@ -63,12 +63,6 @@ main
 		outline: none
 		border: none
 
-.cell-next-x::after
-	content: 'x'
-
-.cell-next-o::after
-	content: 'o'
-
 .cell
 	&:nth-of-type(1)
 		border-right: $cell-border
@@ -98,14 +92,16 @@ main
 		border-left: $cell-border
 		border-top: $cell-border
 
-.next-x:hover::after
-	content: 'X'
-.next-o:hover::after
-	content: 'O'
-
-.next-x:hover, .next-o:hover
-	&::after
-		opacity: 0.25
+.next-X
+	&:hover
+		&::after
+			content: 'X'
+			opacity: 0.25
+.next-O
+	&:hover
+		&::after
+			content: 'O'
+			opacity: 0.25
 
 .buttons
 	display: flex

@@ -4,11 +4,11 @@ import App from './App.jsx'
 
 import './style.sass'
 
-const rootEl = document.getElementById('root')
+const rootEl = document.getElementById('root') as HTMLElement
 const root = ReactDOM.createRoot(rootEl)
 
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+	<React.StrictMode>
+		<App />
+	</React.StrictMode>,
 )
