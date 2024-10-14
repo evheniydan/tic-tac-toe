@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.cell:nth-of-type(1) {
+	@apply border-b-4 border-r-4;
+}
+
+.cell:nth-of-type(2) {
+	@apply border-b-4;
+}
+
+.cell:nth-of-type(3) {
+	@apply border-b-4 border-l-4;
+}
+
+.cell:nth-of-type(4) {
+	@apply border-r-4;
+}
+
+.cell:nth-of-type(6) {
+	@apply border-l-4;
+}
+
+.cell:nth-of-type(7) {
+	@apply border-t-4 border-r-4;
+}
+
+.cell:nth-of-type(8) {
+	@apply border-t-4;
+}
+
+.cell:nth-of-type(9) {
+	@apply border-t-4 border-l-4;
+}
+
+.X-turn:hover::after {
+	@apply content-["X"] opacity-25;
+}
+
+.O-turn:hover::after {
+	@apply content-["O"] opacity-25;
+}
+
+.accent-X {
+	@apply text-orange-400/90;
+}
+
+.accent-O {
+	@apply text-lime-400/90;
+}
