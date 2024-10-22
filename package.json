@@ -1,6 +1,6 @@
 {
 	"name": "tic-tac-toe-game",
-	"homepage": "https://evheniy-dan.github.io/tic-tac-toe/",
+	"homepage": "https://evheniydan.github.io/tic-tac-toe/",
 	"private": true,
 	"version": "1.2.0",
 	"type": "module",
