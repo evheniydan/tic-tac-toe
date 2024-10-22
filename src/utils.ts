@@ -4,11 +4,7 @@ import {twMerge} from 'tailwind-merge'
 import type {Player} from './App'
 import type {ClassValue} from 'clsx'
 
-export const cn = (...inputs: ClassValue[]) => {
-	return twMerge(clsx(inputs))
-}
-
-const winCombinations = [
+const WINNING_BOARDS = [
 	[0, 1, 2],
 	[3, 4, 5],
 	[6, 7, 8],
@@ -19,10 +15,12 @@ const winCombinations = [
 	[2, 4, 6],
 ]
 
-export const checkBoardForWinner = (board: Player[]) => {
-	for (const combination of winCombinations) {
-		const [a, b, c] = combination
+export const cn = (...inputs: ClassValue[]) => {
+	return twMerge(clsx(inputs))
+}
 
+export const checkBoardForWinner = (board: Player[]) => {
+	for (const [a, b, c] of WINNING_BOARDS) {
 		const cellsAreFilled =
 			board[a] !== null && board[b] !== null && board[c] !== null
 		const cellsAreEqual = board[a] === board[b] && board[b] === board[c]

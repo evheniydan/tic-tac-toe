@@ -1,7 +1,8 @@
-import {useState, useEffect, useCallback} from 'react'
+import {useState, useEffect} from 'react'
 
 import GameStatus from './GameStatus'
 import Board from './Board'
+import Button from './Button'
 
 import {checkBoardForWinner} from './utils'
 
@@ -12,71 +13,108 @@ const App = () => {
 	const randomPlayer = Math.random() < 0.5 ? 'X' : 'O'
 	const cleanBoard = Array(9).fill(null)
 
-	const [currentTurn, setCurrentTurn] = useState<'X' | 'O'>(randomPlayer)
+	const [currentPlayer, setCurrentPlayer] = useState<'X' | 'O'>(randomPlayer)
 	const [board, setBoard] = useState<Player[]>(cleanBoard)
 	const [winner, setWinner] = useState<Player>(null)
 	const [score, setScore] = useState<Score>({X: 0, O: 0})
 
+	const [history, setHistory] = useState([
+		{turn: 1, currentPlayer, board: cleanBoard},
+	])
+
 	const boardIsFilled = board.every((cell) => cell !== null)
 	const isGameOver = !!winner || boardIsFilled
 
-	const playNextGame = useCallback(() => {
+	const playNextGame = () => {
 		setWinner(null)
 		setBoard(cleanBoard)
-		setCurrentTurn(randomPlayer)
-	}, [randomPlayer, cleanBoard])
+		setCurrentPlayer(randomPlayer)
+		setHistory([{turn: 1, currentPlayer, board: cleanBoard}])
+	}
 
-	const restartAndResetScore = useCallback(() => {
+	const restartAndResetScore = () => {
 		if (confirm('Are you sure you want to Restart & Reset Score?')) {
 			setScore({X: 0, O: 0})
 			playNextGame()
 		}
-	}, [playNextGame])
+	}
 
 	const handleCellClick = (i: number) => {
 		setBoard((prev) => {
 			const newBoard = [...prev]
-			newBoard[i] = currentTurn
+			newBoard[i] = currentPlayer
 			return newBoard
 		})
-		setCurrentTurn((prev) => (prev === 'X' ? 'O' : 'X'))
+
+		setCurrentPlayer((prev) => (prev === 'X' ? 'O' : 'X'))
 	}
 
+	const handleUndoClick = () => {
+		const lastTurnIdx = history.length - 1
+		const prevTurnIdx = lastTurnIdx - 1
+
+		setBoard(history[prevTurnIdx].board)
+		setCurrentPlayer(history[prevTurnIdx].currentPlayer)
+		setHistory((prev) => prev.filter((historyEntry, i) => i !== lastTurnIdx))
+	}
+
+	// update history on every progress turns
 	useEffect(() => {
-		if (boardIsFilled) {
-			setWinner(null)
-			return
+		if (board.every((cell) => cell === null)) return
+
+		const lastBoard = history[history.length - 1].board
+
+		const isBoardProgressing =
+			board.filter((cell) => cell !== null).length >=
+			lastBoard.filter((cell) => cell !== null).length
+
+		const isBoardDifferent = board.some((cell, i) => cell !== lastBoard[i])
+
+		if (isBoardDifferent && isBoardProgressing) {
+			setHistory((prev) => [
+				...prev,
+				{turn: prev.length + 1, currentPlayer, board},
+			])
 		}
+	}, [board, currentPlayer, history])
 
-		const winner = checkBoardForWinner(board)
-		winner && setWinner(winner)
-	}, [board, boardIsFilled])
-
+	// check for winner on every turn
 	useEffect(() => {
-		winner && setScore((prev) => ({...prev, [winner]: prev[winner] + 1}))
-	}, [winner])
+		const winner = checkBoardForWinner(board)
+
+		if (winner) {
+			setWinner(winner)
+			setScore((prev) => ({...prev, [winner]: prev[winner]++}))
+		} else {
+			if (boardIsFilled) {
+				setWinner(null)
+				setScore((prev) => ({X: prev.X++, O: prev.O++}))
+			}
+		}
+	}, [board, boardIsFilled])
 
 	return (
 		<>
 			<GameStatus
 				score={score}
 				winner={winner}
-				currentTurn={currentTurn}
+				currentPlayer={currentPlayer}
 				isGameOver={isGameOver}
 			/>
 			<Board
 				onCellClick={handleCellClick}
 				board={board}
-				currentTurn={currentTurn}
+				currentPlayer={currentPlayer}
 				isGameOver={isGameOver}
 			/>
-			<button
-				className='text-xl block border-2 rounded-lg px-8 py-4 font-semibold'
-				onClick={isGameOver ? playNextGame : restartAndResetScore}
-				type='button'
-			>
-				{isGameOver ? 'Play Next Game' : 'Restart & Reset Score'}
-			</button>
+			<div className='flex gap-x-4'>
+				{history.length > 1 && !isGameOver && (
+					<Button onClick={handleUndoClick}>Undo</Button>
+				)}
+				<Button onClick={isGameOver ? playNextGame : restartAndResetScore}>
+					{isGameOver ? 'Play Next Game' : 'Restart'}
+				</Button>
+			</div>
 		</>
 	)
 }

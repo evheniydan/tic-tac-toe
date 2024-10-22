@@ -4,14 +4,14 @@ import type {Player, Score} from './App'
 type GameStatusProps = {
 	score: Score
 	winner: Player
-	currentTurn: Player
+	currentPlayer: Player
 	isGameOver: boolean
 }
 
 const GameStatus = ({
 	score,
 	winner,
-	currentTurn,
+	currentPlayer,
 	isGameOver,
 }: GameStatusProps) => (
 	<div className='flex flex-col gap-y-2'>
@@ -34,9 +34,11 @@ const GameStatus = ({
 				<>
 					It's{' '}
 					<span
-						className={cn(currentTurn === 'X' ? 'accent-X' : 'accent-O')}
+						className={cn(
+							currentPlayer === 'X' ? 'accent-X' : 'accent-O',
+						)}
 					>
-						{currentTurn}
+						{currentPlayer}
 					</span>{' '}
 					turn
 				</>
