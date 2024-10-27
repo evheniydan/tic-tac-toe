@@ -1,6 +1,5 @@
 {
 	"name": "tic-tac-toe-game",
-	"homepage": "https://evheniydan.github.io/tic-tac-toe/",
 	"private": true,
 	"version": "1.2.0",
 	"type": "module",
@@ -17,18 +16,18 @@
 		"clsx": "^2.1.1",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"tailwind-merge": "^2.5.3"
+		"tailwind-merge": "^2.5.4"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.9.3",
-		"@types/react": "^18.3.11",
+		"@biomejs/biome": "1.9.4",
+		"@types/react": "^18.3.12",
 		"@types/react-dom": "^18.3.1",
-		"@vitejs/plugin-react": "^4.3.2",
+		"@vitejs/plugin-react": "^4.3.3",
 		"autoprefixer": "^10.4.20",
 		"gh-pages": "^6.2.0",
 		"postcss": "^8.4.47",
-		"tailwindcss": "^3.4.13",
+		"tailwindcss": "^3.4.14",
 		"typescript": "^5.6.3",
-		"vite": "^5.4.8"
+		"vite": "^5.4.10"
 	}
 }
