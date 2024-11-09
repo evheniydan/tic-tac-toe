@@ -84,7 +84,7 @@ const App = () => {
 
 		if (winner) {
 			setWinner(winner)
-			setScore((prev) => ({...prev, [winner]: prev[winner]++}))
+			setScore((prev) => ({...prev, [winner]: prev[winner] + 1}))
 		} else {
 			if (boardIsFilled) {
 				setWinner(null)
