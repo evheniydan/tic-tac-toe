@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react'
 
-import GameStatus from './GameStatus'
-import Board from './Board'
-import Button from './Button'
+import GameStatus from './game-status'
+import Board from './board'
+import Button from './button'
 
 import {checkBoardForWinner} from './utils'
 
@@ -55,7 +55,7 @@ const App = () => {
 
 		setBoard(history[prevTurnIdx].board)
 		setCurrentPlayer(history[prevTurnIdx].currentPlayer)
-		setHistory((prev) => prev.filter((historyEntry, i) => i !== lastTurnIdx))
+		setHistory((prev) => prev.filter((_, i) => i !== lastTurnIdx))
 	}
 
 	// update history on every progress turns

@@ -1,7 +1,7 @@
 import {clsx} from 'clsx'
 import {twMerge} from 'tailwind-merge'
 
-import type {Player} from './App'
+import type {Player} from './app'
 import type {ClassValue} from 'clsx'
 
 const WINNING_BOARDS = [

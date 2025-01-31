@@ -1,4 +1,4 @@
-import type {Player} from './App'
+import type {Player} from './app'
 import {cn} from './utils'
 
 type BoardProps = {

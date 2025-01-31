@@ -1,5 +1,5 @@
 import {cn} from './utils'
-import type {Player, Score} from './App'
+import type {Player, Score} from './app'
 
 type GameStatusProps = {
 	score: Score
