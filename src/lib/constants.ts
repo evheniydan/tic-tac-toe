@@ -8,3 +8,8 @@ export const WIN_COMBINATIONS = [
 	[0, 4, 8],
 	[2, 4, 6],
 ]
+
+export const PLAYER_CLASSNAMES = {
+	X: 'text-orange-400',
+	O: 'text-lime-400',
+}

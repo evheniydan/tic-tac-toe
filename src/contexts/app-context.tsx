@@ -9,13 +9,9 @@ type AppContextValue = {
 	isGameOver: boolean
 	board: (Player | null)[]
 	handleCellClick: (i: number) => void
-	resetGame: () => void
+	goToNextGame: () => void
 	handleUndo: () => void
-	history: {
-		turn: number
-		currentPlayer: Player
-		board: (Player | null)[]
-	}[]
+	isUndoAvailable: boolean
 	resetGameAndScore: () => void
 } | null
 
@@ -39,12 +35,13 @@ export const AppContextProvider = ({children}: Props) => {
 
 	const isBoardFilled = board.every((c) => c)
 	const isGameOver = !!winner || isBoardFilled
+	const isUndoAvailable = history.length > 1 && !isGameOver
 
 	const toggleCurrentPlayer = () => {
 		setCurrentPlayer((p) => (p === 'X' ? 'O' : 'X'))
 	}
 
-	const resetGame = () => {
+	const goToNextGame = () => {
 		setWinner(null)
 		setBoard(CLEAN_BOARD)
 		setCurrentPlayer(getRandomPlayer())
@@ -54,7 +51,7 @@ export const AppContextProvider = ({children}: Props) => {
 	const resetGameAndScore = () => {
 		if (confirm('Are you sure you want to restart & reset score?')) {
 			setScore({X: 0, O: 0})
-			resetGame()
+			goToNextGame()
 		}
 	}
 
@@ -117,9 +114,9 @@ export const AppContextProvider = ({children}: Props) => {
 				isGameOver,
 				board,
 				handleCellClick,
-				resetGame,
+				goToNextGame,
 				handleUndo,
-				history,
+				isUndoAvailable,
 				resetGameAndScore,
 			}}
 		>

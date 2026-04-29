@@ -2,17 +2,23 @@ import useAppContext from '../contexts/app-context'
 import Button from './ui/button'
 
 const Controls = () => {
-	const {history, isGameOver, handleUndo, resetGame, resetGameAndScore} =
-		useAppContext()
+	const {
+		isUndoAvailable,
+		isGameOver,
+		handleUndo,
+		goToNextGame,
+		resetGameAndScore,
+	} = useAppContext()
 
 	return (
 		<div className='flex gap-x-4'>
-			{history.length > 1 && !isGameOver && (
-				<Button onClick={handleUndo}>Undo</Button>
+			{isUndoAvailable && <Button onClick={handleUndo}>Undo</Button>}
+
+			{isGameOver ? (
+				<Button onClick={goToNextGame}>Play Next</Button>
+			) : (
+				<Button onClick={resetGameAndScore}>Reset</Button>
 			)}
-			<Button onClick={isGameOver ? resetGame : resetGameAndScore}>
-				{isGameOver ? 'Play Next Game' : 'Restart'}
-			</Button>
 		</div>
 	)
 }

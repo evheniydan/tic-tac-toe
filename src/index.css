@@ -1,33 +1,28 @@
-@tailwind base;
+@import 'tailwindcss';
 
-@tailwind components;
+@theme inline {
+	--color-dark-shades: var(--color-slate-800);
+	--color-light-shades: var(--color-slate-200);
+	--color-accent-x: var(--color-orange-400);
+	--color-accent-o: var(--color-lime-400);
+}
 
-@tailwind utilities;
+body {
+	@apply bg-dark-shades text-light-shades flex min-h-screen items-center;
+}
+
+#root {
+	@apply container mx-auto flex flex-col items-center gap-y-8;
+}
 
 .cell {
-	@apply border-0;
+	@apply border-light-shades border-0;
 }
 
 .cell:not(:nth-child(3n)) {
-	@apply border-r-4;
+	@apply border-r-2;
 }
 
 .cell:nth-child(-n + 6) {
-	@apply border-b-4;
-}
-
-.X-turn:hover::after {
-	@apply content-["X"] opacity-25;
-}
-
-.O-turn:hover::after {
-	@apply content-["O"] opacity-25;
-}
-
-.accent-X {
-	@apply text-orange-400/90;
-}
-
-.accent-O {
-	@apply text-lime-400/90;
+	@apply border-b-2;
 }

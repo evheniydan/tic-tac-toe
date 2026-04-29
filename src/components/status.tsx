@@ -1,43 +1,29 @@
 import useAppContext from '../contexts/app-context'
-import {cn} from '../lib/utils'
+import {PLAYER_CLASSNAMES} from '../lib/constants'
 
 const Status = () => {
-	const {score, winner, isGameOver, currentPlayer} = useAppContext()
+	const {winner, isGameOver, currentPlayer} = useAppContext()
+
+	if (winner) {
+		return (
+			<h2 className='text-5xl'>
+				<span className={PLAYER_CLASSNAMES[winner]}>{winner}</span> is a
+				winner
+			</h2>
+		)
+	}
+
+	if (isGameOver) {
+		return <h2 className='text-5xl'>It's a Draw</h2>
+	}
 
 	return (
-		<div className='flex flex-col gap-y-2'>
-			<h1 className='text-6xl text-center'>
-				<span className='accent-X'>{score.X}</span>
-				{' : '}
-				<span className='accent-O'>{score.O}</span>
-			</h1>
-			<h2 className='text-5xl text-center'>
-				{winner ? (
-					<>
-						<span
-							className={cn(winner === 'X' ? 'accent-X' : 'accent-O')}
-						>
-							{winner}
-						</span>{' '}
-						is a winner
-					</>
-				) : isGameOver ? (
-					<>It's a Draw</>
-				) : (
-					<>
-						It's{' '}
-						<span
-							className={cn(
-								currentPlayer === 'X' ? 'accent-X' : 'accent-O',
-							)}
-						>
-							{currentPlayer}
-						</span>{' '}
-						turn
-					</>
-				)}
-			</h2>
-		</div>
+		<h2 className='text-5xl'>
+			Turn:{' '}
+			<span className={PLAYER_CLASSNAMES[currentPlayer]}>
+				{currentPlayer}
+			</span>
+		</h2>
 	)
 }
 
