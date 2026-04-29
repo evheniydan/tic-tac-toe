@@ -1,7 +1,7 @@
 import useAppContext from '../contexts/app-context'
 import {cn} from '../lib/utils'
 
-const GameStatus = () => {
+const Status = () => {
 	const {score, winner, isGameOver, currentPlayer} = useAppContext()
 
 	return (
@@ -41,4 +41,4 @@ const GameStatus = () => {
 	)
 }
 
-export default GameStatus
+export default Status

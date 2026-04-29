@@ -1,7 +1,7 @@
 import useAppContext from '../contexts/app-context'
 import Button from './ui/button'
 
-const GameControls = () => {
+const Controls = () => {
 	const {history, isGameOver, handleUndo, resetGame, resetGameAndScore} =
 		useAppContext()
 
@@ -17,4 +17,4 @@ const GameControls = () => {
 	)
 }
 
-export default GameControls
+export default Controls
