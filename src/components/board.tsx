@@ -1,14 +1,10 @@
-import type {Player} from './app'
-import {cn} from './utils'
+import useAppContext from '../contexts/app-context'
+import type {Player} from '../lib/types'
+import {cn} from '../lib/utils'
 
-type BoardProps = {
-	board: Player[]
-	currentPlayer: Player
-	isGameOver: boolean
-	onCellClick: (i: number) => void
-}
+const Board = () => {
+	const {board, currentPlayer, isGameOver, handleCellClick} = useAppContext()
 
-const Board = ({board, currentPlayer, isGameOver, onCellClick}: BoardProps) => {
 	return (
 		<div className='grid grid-rows-[repeat(3,100px)] grid-cols-[repeat(3,100px)] justify-center items-center'>
 			{board.map((value, i) => {
@@ -23,7 +19,7 @@ const Board = ({board, currentPlayer, isGameOver, onCellClick}: BoardProps) => {
 							!isGameOver && !value && currentPlayer === 'X' && 'X-turn',
 							!isGameOver && !value && currentPlayer === 'O' && 'O-turn',
 						)}
-						onClick={() => onCellClick(i)}
+						onClick={() => handleCellClick(i)}
 						key={i}
 					>
 						{value}
