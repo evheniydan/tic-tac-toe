@@ -14,15 +14,3 @@ body {
 #root {
 	@apply container mx-auto flex flex-col items-center gap-y-8;
 }
-
-.cell {
-	@apply border-light-shades border-0;
-}
-
-.cell:not(:nth-child(3n)) {
-	@apply border-r-2;
-}
-
-.cell:nth-child(-n + 6) {
-	@apply border-b-2;
-}
