@@ -1,3 +1,3 @@
-# Tic-Tac-Toe Game
+# Tic-Tac-Toe
 
-This is a simple Tic-Tac-Toe Game written in React.
+Tic-Tac-Toe game written with React & TypeScript.
