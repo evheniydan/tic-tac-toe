@@ -2,7 +2,7 @@ import useAppContext from '../contexts/app-context'
 import {PLAYER_CLASSNAMES} from '../lib/constants'
 
 const Status = () => {
-	const {winner, isGameOver, currentPlayer} = useAppContext()
+	const {winner, isGameOver, turn} = useAppContext()
 
 	if (winner) {
 		return (
@@ -20,8 +20,8 @@ const Status = () => {
 	return (
 		<h2 className='text-5xl'>
 			Turn:{' '}
-			<span className={PLAYER_CLASSNAMES[currentPlayer]}>
-				{currentPlayer}
+			<span className={PLAYER_CLASSNAMES[turn]}>
+				{turn}
 			</span>
 		</h2>
 	)

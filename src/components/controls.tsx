@@ -6,8 +6,8 @@ const Controls = () => {
 		isUndoAvailable,
 		isGameOver,
 		handleUndo,
-		goToNextGame,
-		resetGameAndScore,
+		playNext,
+		reset,
 	} = useAppContext()
 
 	return (
@@ -15,9 +15,9 @@ const Controls = () => {
 			{isUndoAvailable && <Button onClick={handleUndo}>Undo</Button>}
 
 			{isGameOver ? (
-				<Button onClick={goToNextGame}>Play Next</Button>
+				<Button onClick={playNext}>Play Next</Button>
 			) : (
-				<Button onClick={resetGameAndScore}>Reset</Button>
+				<Button onClick={reset}>Reset</Button>
 			)}
 		</div>
 	)
