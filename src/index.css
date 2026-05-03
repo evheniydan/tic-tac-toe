@@ -8,9 +8,9 @@
 }
 
 body {
-	@apply bg-dark-shades text-light-shades flex min-h-screen items-center;
+	@apply bg-dark-shades text-light-shades;
 }
 
 #root {
-	@apply container mx-auto flex flex-col items-center gap-y-8;
+	@apply flex h-screen flex-col items-center justify-center gap-y-8 py-16;
 }
